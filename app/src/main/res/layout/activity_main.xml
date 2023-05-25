@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <!--    1. 레이아웃뷰와 바인딩할 데이터 변수 선언-->
+    <!--    데이터바인딩이란 ? 텍스트뷰야 넌 글씨 갖고있지망-->
+        <data>
+
+            <variable
+                name="user"
+                type="com.nha2023.ex97databinding.User" />
+
+        </data>
+
+    <!--    2. 화면 레이아웃 뷰 필요함-->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+    <!--        글씨를 보여주는 텍스트뷰-->
+    <!--        데이터바인딩은 id로 찾지 않는다. -->
+
+        <TextView
+            android:text="@{user.name}"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+<!--        Int형 값을 보여주는 텍스트뷰-->
+        <TextView
+            android:text="@{String.valueOf(user.age)}"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+<!--     @{user.age}이걸 20으로 읽지 못한다. Textview이니까    -->
+<!--        {} 이 안에서는 덧셈결합연산자가 통하지 않는다. -->
+<!--        String.valueOf은 써진 글자를 내가원하는 자료형으로 바꿔준다 .-->
+
+<!--        Boolean값을 보여주는 CheckBox를 만들자-->
+        <CheckBox
+            android:text="love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@{user.fav}"
+            android:onCheckedChanged="@{user::changedFav}"/>
+<!--changedFav 이친구는 파라미터 2개짜리 콜백메소드가 맞다!-->
+
+
+<!--        클릭이벤트에 따라 이름 글씨를 변경해보기-->
+        <Button
+            android:backgroundTint="#F8D9D9"
+            android:textColor="@color/black"
+            android:text="change name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{user::changeName}"/>
+<!--        호출문, 즉 .과 ()을 쓰면 안된다. -->
+<!--        user안에있는 함수 이름을 기재해주는것 뿐이다. -->
+
+        <Button
+            android:text="나이 1 증가"
+            android:backgroundTint="#03A9F4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{user::increaseAge}"/>
+
+        <Button
+            android:text="좋아요 체크 상태 변경"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->user.toggleFav()}"/>
+<!--        파라미터는 자료형 안쓴다-->
+<!--        여기서는 호출한다.-->
+<!--        함수 정의를 한것이다. -->
+<!--        직접 콜백용 함수를 정확하게 만든건아니지만(User객체에 파라미터를 안줬으니), 콜백함수를 익명으로 만들고-->
+<!--        내가 필요한 함수를 직접 만든것이다.-->
+
+<!--        EditText 글씨제어하기-->
+<!--        기본 속성으로 지정이 불가한 data binding으로 대응 : 리싸이클러뷰속성은 어케함?? -->
+
+    </LinearLayout>
+</layout>

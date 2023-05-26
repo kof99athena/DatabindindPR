@@ -53,4 +53,27 @@ class User {
         fav.set(ischecked)
     }
 
+    //EditText의 글씨 변화 값을 가지고 있을 관찰 가능한 변수
+    val message: ObservableField<String> = ObservableField("message")
+
+    //EditText의 글씨변화 이벤트에 반응하는 콜백메소드 - 파라미터가 중요
+    //파라미터 모르겠으면 object : TextWatcher를 보자
+    fun onTextChange(s:CharSequence?, start:Int, end:Int, count:Int){
+        message.set(s.toString())
+    }
+
+    //EditText에 글씨를 입력하고 버튼을 클릭하여 텍스트뷰에 보여주기
+    private var inputValue : String = ""
+    val value : ObservableField<String> = ObservableField(inputValue)
+
+    //EditText의 글씨 변경 이벤트 콜백메소드에 의해 호출될 일반 메소드
+    fun changeInputValue(s:CharSequence){
+        inputValue=s.toString()
+    }
+
+    //작성 완료버튼 클릭 콜백메소드에 의해 호출될 일반 메소드
+    fun clickBtn(){
+        value.set(inputValue)
+    }
+
 }

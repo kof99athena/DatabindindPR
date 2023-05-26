@@ -82,7 +82,58 @@
 <!--        내가 필요한 함수를 직접 만든것이다.-->
 
 <!--        EditText 글씨제어하기-->
-<!--        기본 속성으로 지정이 불가한 data binding으로 대응 : 리싸이클러뷰속성은 어케함?? -->
+        <EditText
+            android:hint="enter Text"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onTextChanged="@{user::onTextChange}"/>
 
+<!--        EditText의 글씨가 변경될때마다 그 글씨를 보여주는 TextView-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:textColor="@color/black"
+            android:padding="8dp"
+            android:text="@{user.message}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+<!--        EditText의 글씨를 버튼이 클릭되면 텍스트뷰에 보여주기-->
+        <EditText
+            android:hint="입력하세요"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onTextChanged="@{(s,strat,end,count)-> user.changeInputValue(s) }"/>
+
+        <Button
+            android:text="작성완료"
+            android:onClick="@{v->user.clickBtn()}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textColor="@color/black"
+            android:padding="8dp"
+            android:text="@{user.value}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+<!--        기본 속성으로 지정이 불가한 data binding으로 대응 : 리싸이클러뷰속성은 어케함?? -->
+<!--        프래그먼트에서 databinding 해보기 -->
+        <fragment
+            android:id="@+id/frag"
+            android:name="com.nha2023.ex97databinding.MyFragment"
+            android:background="#FDD1D1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_my"/>
+<!--        액티비티안의 프래그먼트를 보여주는 tools, 반드시 name에 프래그먼트를 연결해줘야한다. -->
+<!--data바인딩이지만 id안주면 에러난다. -->
     </LinearLayout>
 </layout>
